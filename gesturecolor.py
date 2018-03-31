@@ -70,7 +70,7 @@ while(cap.isOpened()):
         end = tuple(cnt[e][0])
         far = tuple(cnt[f][0])
 
-        # find length of all sides of triangle
+        # find string(length of all sides of triangle
         a = math.sqrt((end[0] - start[0])**2 + (end[1] - start[1])**2)
         b = math.sqrt((far[0] - start[0])**2 + (far[1] - start[1])**2)
         c = math.sqrt((end[0] - far[0])**2 + (end[1] - far[1])**2)
@@ -90,13 +90,13 @@ while(cap.isOpened()):
         cv2.line(crop_img,start, end, [0,255,0], 2)
         #cv2.circle(crop_img,far,5,[0,0,255],-1)
 
-    print (angulos[:4])
+    print ( "angulos : " + str(angulos[:4]) )
     # define actions required
     if count_defects == 1:
         cv2.putText(img,"I am Vipul", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
     elif count_defects == 2:
-        str = "This is a basic hand gesture recognizer"
-        cv2.putText(img, str, (5, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, 2)
+        string = "This is a basic hand gesture recognizer"
+        cv2.putText(img, string, (5, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, 2)
     elif count_defects == 3:
         cv2.putText(img,"This is 4 :P", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
     elif count_defects == 4:
@@ -110,6 +110,9 @@ while(cap.isOpened()):
     all_img = np.hstack((drawing, crop_img))
     cv2.imshow('Contours', all_img)
 
+#######################################################################################################################
+
+#######################################################################################################################
     _, img2 = cap.read()
 
     #converting frame (img2 i.e BGR) to HSV (hue-saturation-value)
@@ -177,74 +180,109 @@ while(cap.isOpened()):
     orange=cv2.dilate(orange,kernal)
     Ores=cv2.bitwise_and(img2,img2, mask = orange)
 
+
+    red_objects, blue_objects,yellow_objects,green_objects, orange_objects, purple_objects, black_objects = [],[],[],[],[],[],[]
+    
     #Tracking the Red Color
+    contador = 0
     (_,contours, hierarchy)=cv2.findContours(red,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     for pic,contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if (area > 200):
             x,y,w,h = cv2.boundingRect(contour)
             img2 = cv2.rectangle(img2,(x,y),(x+w,y+h),(0,0,255),2)
+            red_objects.append([x+w/2 , y+h/2])
             cv2.putText(img2,"RED color",(x,y),cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255))
 
     #Tracking the Blue Color
+    contador = 0
     (_,contours, hierarchy)=cv2.findContours(blue,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     for pic,contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if (area > 200):
             x,y,w,h = cv2.boundingRect(contour)
             img2 = cv2.rectangle(img2,(x,y),(x+w,y+h),(0,0,255),2)
+            blue_objects.append([x+w/2 , y+h/2])
             cv2.putText(img2,"BLUE color",(x,y),cv2.FONT_HERSHEY_SIMPLEX,0.7,(255,0,0))
 
     #Tracking the YELLOW Color
+    contador = 0
     (_,contours, hierarchy)=cv2.findContours(yellow,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     for pic,contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if (area > 200):
             x,y,w,h = cv2.boundingRect(contour)
             img2 = cv2.rectangle(img2,(x,y),(x+w,y+h),(0,0,255),2)
+            yellow_objects.append([x+w/2 , y+h/2])
             cv2.putText(img2,"YELLLOW color",(x,y),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0))
 
     #Tracking the purple Color
+    contador = 0
     (_,contours, hierarchy)=cv2.findContours(purple,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     for pic,contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if (area > 200):
             x,y,w,h = cv2.boundingRect(contour)
             img2 = cv2.rectangle(img2,(x,y),(x+w,y+h),(255,0,255),2)
+            purple_objects.append([x+w/2 , y+h/2])
             cv2.putText(img2,"purple color",(x,y),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0))
 
-
-
     #Tracking the green Color
+    contador = 0
     (_,contours, hierarchy)=cv2.findContours(green,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     for pic,contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if (area > 200):
             x,y,w,h = cv2.boundingRect(contour)
             img2 = cv2.rectangle(img2,(x,y),(x+w,y+h),(255,0,255),2)
+            green_objects.append([x+w/2 , y+h/2])
             cv2.putText(img2,"green color",(x,y),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0))
 
-
     #Tracking the black Color
+    contador = 0
     (_,contours, hierarchy)=cv2.findContours(black,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     for pic,contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if (area > 200):
             x,y,w,h = cv2.boundingRect(contour)
             img2 = cv2.rectangle(img2,(x,y),(x+w,y+h),(255,0,255),2)
+            black_objects.append([x+w/2 , y+h/2])
             cv2.putText(img2,"black color",(x,y),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0))
 
     #Tracking the orange Color
+    contador = 0
     (_,contours, hierarchy)=cv2.findContours(orange,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     for pic,contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if (area > 200):
             x,y,w,h = cv2.boundingRect(contour)
             img2 = cv2.rectangle(img2,(x,y),(x+w,y+h),(255,0,255),2)
+            orange_objects.append([x+w/2 , y+h/2])
             cv2.putText(img2,"orange color",(x,y),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0))
 
 
-    #cv2.img2show("Redcolour",red)
+    print ("red\t\tblue\t\tyellow\t\tgreen\t\tpurple\t\torange\t\tblack")
+    print(str(len(red_objects)) + "\t\t" + str(len(blue_objects)) + "\t\t" + str(len(yellow_objects)) + "\t\t" + 
+    		str(len(green_objects)) + "\t\t" + str(len(purple_objects)) + "\t\t" + str(len(orange_objects))
+    		 + "\t\t" + str(len(black_objects))  )
+
+
+    a= ""
+    a += str(red_objects[0])  if red_objects else "[0000,0000]"
+    a += "\t"
+    a += str(blue_objects[0])  if blue_objects else "[0000,0000]"
+    a += "\t"
+    a += str(yellow_objects[0])  if yellow_objects else "[0000,0000]"
+    a += "\t"
+    a += str(green_objects[0])  if green_objects else "[0000,0000]"
+    a += "\t"
+    a += str(purple_objects[0])  if purple_objects else "[0000,0000]"
+    a += "\t"
+    a += str(orange_objects[0])  if orange_objects else "[0000,0000]"
+    a += "\t"
+    a += str(black_objects[0])  if black_objects else "[0000,0000]"
+    print (a)
+	#cv2.img2show("Redcolour",red)
     cv2.imshow("Color Tracking",img2)
     #cv2.img2show("red",res)
 
