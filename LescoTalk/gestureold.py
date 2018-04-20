@@ -84,32 +84,32 @@ while (cap.isOpened()):
     cv2.imshow("Calibration", img3)
     cv2.setMouseCallback('Calibration',mouseclic)
 
-    if muestras == 5:
+    if muestras == 3:
         blue_lower = np.array(vecmin, np.uint8)
         blue_upper = np.array(vecmax, np.uint8)
         vecmin = [999,999,999] 
         vecmax = [0,0,0]
-    if muestras == 15:
+    if muestras == 6:
         purple_lower = np.array(vecmin, np.uint8)
         purple_upper = np.array(vecmax, np.uint8)
         vecmin = [999,999,999] 
         vecmax = [0,0,0]
-    if muestras == 15:
+    if muestras == 9:
         red_lower = np.array(vecmin, np.uint8)
         red_upper = np.array(vecmax, np.uint8)
         vecmin = [999,999,999] 
         vecmax = [0,0,0]
-    if muestras == 20:
+    if muestras == 12:
         green_lower = np.array(vecmin, np.uint8)
         green_upper = np.array(vecmax, np.uint8)
         vecmin = [999,999,999] 
         vecmax = [0,0,0]
-    if muestras == 25:
+    if muestras == 15:
         yellow_lower = np.array(vecmin, np.uint8)
         yellow_upper = np.array(vecmax, np.uint8)
         vecmin = [999,999,999] 
         vecmax = [0,0,0]
-    if muestras == 30:
+    if muestras == 18:
         black_lower = np.array(vecmin, np.uint8)
         black_upper = np.array(vecmax, np.uint8)
         vecmin = [999,999,999] 
@@ -132,7 +132,7 @@ while (cap.isOpened()):
     cv2.imshow("Calibration", img3)
     cv2.setMouseCallback('Calibration',mouseclic)
     
-    if muestras == 35:
+    if muestras == 21:
         orange_lower = np.array(vecmin, np.uint8)
         orange_upper = np.array(vecmax, np.uint8)
         vecmin = [999,999,999] 
@@ -341,6 +341,8 @@ while (cap.isOpened()):
     else:
         finger_position_list[0].append(0)
         finger_position_list[1].append(0)
+
+    
 
     dev = 1
     if (dev == 0):
